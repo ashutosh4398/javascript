@@ -1,8 +1,14 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
-// dummy value as of now
-currentResult += 10;
-currentResultDescription = defaultResult + ' + 10';
+function addNumbers() {
+    // function to add numbers
+    currentResult = currentResult + parseFloat(userInput.value);
+    outputResult(currentResult, '');
+}
 
-outputResult(currentResult, currentResultDescription);
+addBtn.addEventListener('click', addNumbers);
+
+// currentResultDescription = defaultResult + ' + 10';
+
+// outputResult(currentResult, currentResultDescription);
