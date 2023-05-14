@@ -22,9 +22,9 @@ function createAndWriteLogOutput(operator, calcBefore, newNumber) {
 
 
 function writeToLog(
-    operation, 
-    prevResult, 
-    newNumber, 
+    operation,
+    prevResult,
+    newNumber,
     newResult
 ) {
     const logEntry = {
@@ -36,9 +36,22 @@ function writeToLog(
     logEntries.push(logEntry);
 }
 
+function isValidOperation(calcOperation, enteredNumber) {
+    return (
+        calcOperation === operations.ADD ||
+        calcOperation === operations.SUBTRACT ||
+        calcOperation === operations.MULTIPLY ||
+        calcOperation === operations.DIVIDE
+    ) && (enteredNumber);
+}
+
 
 function calculateResult(calcOperation) {
+   
     const enteredNumber = getUserNumberInput();
+    if (!isValidOperation(calcOperation, enteredNumber)) {
+        return;
+    }
     const initialResult = currentResult;
     let calcSign;
     if (calcOperation === operations.ADD) {
@@ -53,8 +66,6 @@ function calculateResult(calcOperation) {
     } else if (calcOperation === operations.DIVIDE) {
         currentResult /= enteredNumber;
         calcSign = '/';
-    } else {
-        throw "Unsupported operation passed";
     }
     createAndWriteLogOutput(calcSign, initialResult, enteredNumber);
     writeToLog(calcOperation, initialResult, enteredNumber, currentResult);
