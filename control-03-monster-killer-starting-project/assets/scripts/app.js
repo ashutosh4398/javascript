@@ -26,23 +26,38 @@ function deductBonusLife() {
     playerLives--;
 }
 
+function reset() {
+    currentMonsterHealth = chosenMaxLife;
+    currentPlayerHealth = chosenMaxLife;
+    resetGame(chosenMaxLife);
+}
+
 function playerAttackValue(mode) {
     if (mode === PLAYER_ATTACK_MODES.NORMAL_ATTACK) {
         return PLAYER_ATTACK_VALUE;
     } else if( mode === PLAYER_ATTACK_MODES.STRONG_ATTACK ) {
-        return STRONG_ATTACK_VALUE
+        return STRONG_ATTACK_VALUE;
     } else {
         throw "Invalid mode passed";
     }
 }
 
 function checkHealthAndDisplayResult() {
+    let isGameResultReady = false;
+    
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
-        return alert("You Won!");
+        isGameResultReady = true;
+        alert("You Won!");
     } else if(currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
-        return alert('You lost!');
+        isGameResultReady = true;
+        alert('You lost!');
     } else if(currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
-        return alert("Drawn!");
+        isGameResultReady = true;
+        alert("Drawn!");
+    }
+
+    if (isGameResultReady) {
+        reset();
     }
 }
 
