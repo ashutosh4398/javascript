@@ -4,7 +4,15 @@ const HEAL_VALUE = 20;
 
 const STRONG_ATTACK_VALUE = 17;
 
-let chosenMaxLife = 100; // need to rethink of const instead of let;
+const enteredValue = prompt('Enter maximum life for both Monster and Player', '100');
+let chosenMaxLife = parseInt(enteredValue);
+
+// user input validation and handling
+if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+    chosenMaxLife = 100;
+}
+
+adjustHealthBars(chosenMaxLife);
 
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
