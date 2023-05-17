@@ -26,6 +26,8 @@ const logEvents = {
     PLAYER_STRONG_ATTACK: "PLAYER_STRONG_ATTACK",
     MONSTER_ATTACK: "MONSTER_ATTACK",
     PLAYER_HEALED: "PLAYER_HEALED",
+    GAME_OVER: "GAME_OVER",
+    LIFE_REDUCED: "LIFE_REDUCED"
 }
 
 let battleLog = [];
@@ -45,7 +47,18 @@ function deductBonusLife() {
     playerLives--;
 }
 
+function writeToLog(event, damage, monsterHealth, playerHealth) {
+    const logEntry = {
+        event: event,
+        value: damage,
+        monsterHealth: monsterHealth,
+        playerHealth: playerHealth
+    };
+    battleLog.push(logEntry);
+}
+
 function reset() {
+    writeToLog(logEvents.GAME_OVER, 'GAME_OVER', currentMonsterHealth, currentPlayerHealth);
     currentMonsterHealth = chosenMaxLife;
     currentPlayerHealth = chosenMaxLife;
     resetGame(chosenMaxLife);
@@ -77,6 +90,7 @@ function checkHealthAndDisplayResult() {
 
     if (isGameResultReady) {
         reset();
+        
     }
 }
 
@@ -84,6 +98,8 @@ function attackMonster(mode) {
     const attackValue = playerAttackValue(mode);
     const monsterDamage = dealMonsterDamage(attackValue);
     currentMonsterHealth -= monsterDamage;
+    mode = (mode === PLAYER_ATTACK_MODES.NORMAL_ATTACK)? logEvents.PLAYER_NORMAL_ATTACK : logEvents.PLAYER_STRONG_ATTACK
+    writeToLog(mode, monsterDamage, currentMonsterHealth, currentPlayerHealth);
 }
 
 function attackPlayer() { 
@@ -91,10 +107,13 @@ function attackPlayer() {
     // monster causes damage to player with force of MONSTER_ATTACK_VALUE
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
+    writeToLog(logEvents.MONSTER_ATTACK, playerDamage, currentMonsterHealth, currentPlayerHealth);
     // check for bonus lives
     if (isPlayerDead() && isBonusLifeAvailable()) {
+
         deductBonusLife(); // Logical removal
         setBonusLife(playerLives); // UI rendering
+        writeToLog(logEvents.LIFE_REDUCED, playerLives, currentMonsterHealth, currentPlayerHealth);
         currentPlayerHealth = initialHealth;
         alert("You would be dead but the bonus life saved you!!");
         setPlayerHealth(initialHealth);
@@ -128,8 +147,15 @@ function healPlayerHander() {
     currentPlayerHealth += healValue;
     attackPlayer();
     checkHealthAndDisplayResult();
+    writeToLog(logEvents.PLAYER_HEALED, healValue, currentMonsterHealth, currentPlayerHealth);
+}
+
+
+function logHandler() {
+    console.table(battleLog);
 }
 
 attackBtn.addEventListener('click', attackHandler);
 strongAttackBtn.addEventListener('click', strongAttackHandler);
 healBtn.addEventListener('click', healPlayerHander);
+logBtn.addEventListener('click', logHandler);
