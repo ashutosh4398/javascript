@@ -17,10 +17,21 @@ adjustHealthBars(chosenMaxLife);
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 
-let playerLives = 1;
+let playerLives = 3;
 
-const PLAYER_ATTACK_MODES = { NORMAL_ATTACK: 0, STRONG_ATTACK: 1 };
+const PLAYER_ATTACK_MODES = { NORMAL_ATTACK: 'NORMAL_ATTACK', STRONG_ATTACK: 'STRONG_ATTACK' };
 
+const logEvents = {
+    PLAYER_NORMAL_ATTACK: "PLAYER_NORMAL_ATTACK",
+    PLAYER_STRONG_ATTACK: "PLAYER_STRONG_ATTACK",
+    MONSTER_ATTACK: "MONSTER_ATTACK",
+    PLAYER_HEALED: "PLAYER_HEALED",
+}
+
+let battleLog = [];
+
+// bonus life setting
+setBonusLife(playerLives)
 
 function isPlayerDead() {
     return currentPlayerHealth <= 0;
@@ -83,7 +94,7 @@ function attackPlayer() {
     // check for bonus lives
     if (isPlayerDead() && isBonusLifeAvailable()) {
         deductBonusLife(); // Logical removal
-        removeBonusLife(); // UI rendering
+        setBonusLife(playerLives); // UI rendering
         currentPlayerHealth = initialHealth;
         alert("You would be dead but the bonus life saved you!!");
         setPlayerHealth(initialHealth);
