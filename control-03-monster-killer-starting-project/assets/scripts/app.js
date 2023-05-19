@@ -4,14 +4,26 @@ const HEAL_VALUE = 20;
 
 const STRONG_ATTACK_VALUE = 17;
 
-const enteredValue = prompt(
-  "Enter maximum life for both Monster and Player",
-  "100"
-);
-let chosenMaxLife = parseInt(enteredValue);
+function getMaxLifeValue() {
+  
+  const enteredValue = prompt(
+    "Enter maximum life for both Monster and Player",
+    "100"
+  );
+  let parsedValue = parseInt(enteredValue);
+  // user input validation and handling
+  if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw {message: 'Invalid user input'};
+  }
+  return parsedValue;
+}
 
-// user input validation and handling
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+let chosenMaxLife;
+try{
+  chosenMaxLife = getMaxLifeValue();
+} catch (error) {
+  console.log(error);
+  console.log("RAISED CUSTOM EXCEPTION");
   chosenMaxLife = 100;
 }
 
