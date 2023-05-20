@@ -24,7 +24,7 @@ const getPlayerChoice = function () {
   return selection;
 };
 
-const getComputerChoice = function () {
+const getComputerChoice = () => {
   const randomValue = Math.random();
 
   if (randomValue < 0.34) {
@@ -36,22 +36,19 @@ const getComputerChoice = function () {
   }
 };
 
-const determineWinner = function (userChoice, computerChoice) {
-  if (computerChoice === userChoice) {
-    return RESULT_DRAW;
-  } else if (
-    (userChoice === ROCK && computerChoice === SCISSORS) ||
-    (userChoice === PAPER && computerChoice === ROCK) ||
-    (userChoice === SCISSORS && computerChoice === PAPER)
-  ) {
-    return RESULT_PLAYER_WIN;
-  }
-  {
-    return RESULT_COMPUTER_WIN;
-  }
-};
+// arrow function
+// provides syntactic sugar for single expression to be returned;
+const determineWinner = (userChoice, computerChoice) => (
+  computerChoice === userChoice
+    ? RESULT_DRAW
+    : (userChoice === ROCK && computerChoice === SCISSORS) ||
+      (userChoice === PAPER && computerChoice === ROCK) ||
+      (userChoice === SCISSORS && computerChoice === PAPER)
+    ? RESULT_PLAYER_WIN
+    : RESULT_COMPUTER_WIN
+);
 
-startGameBtn.addEventListener("click", function () {
+startGameBtn.addEventListener("click", () => {
   if (isGameRunning) {
     return;
   }
