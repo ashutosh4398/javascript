@@ -55,7 +55,7 @@ const _addUsingRestOp = (...numbers) => {
 
 // we can use rest operator similar to args in python
 const addUsingRestOp = (...numbers) => {
-    numbers = [...numbers, 10];
+    numbers = [...numbers, 10]; // ... over here is treated as spread operator
     return _addUsingRestOp(...numbers);
 }
 
@@ -73,4 +73,4 @@ const subMe = function() {
     return result;
 }
 
-console.log(subMe(1,10));
+// console.log(subMe(1,10));
