@@ -38,15 +38,14 @@ const getComputerChoice = () => {
 
 // arrow function
 // provides syntactic sugar for single expression to be returned;
-const determineWinner = (userChoice, computerChoice) => (
+const determineWinner = (userChoice, computerChoice) =>
   computerChoice === userChoice
     ? RESULT_DRAW
     : (userChoice === ROCK && computerChoice === SCISSORS) ||
       (userChoice === PAPER && computerChoice === ROCK) ||
       (userChoice === SCISSORS && computerChoice === PAPER)
     ? RESULT_PLAYER_WIN
-    : RESULT_COMPUTER_WIN
-);
+    : RESULT_COMPUTER_WIN;
 
 startGameBtn.addEventListener("click", () => {
   if (isGameRunning) {
@@ -57,5 +56,14 @@ startGameBtn.addEventListener("click", () => {
   const playerSelection = getPlayerChoice();
   const computerSelection = getComputerChoice();
   const winner = determineWinner(playerSelection, computerSelection);
-  console.log(winner);
+  let message = `You picked ${playerSelection}, computer picked ${computerSelection}, thus `;
+  if (winner === RESULT_DRAW) {
+    message += "you had a draw";
+  } else if (winner === RESULT_PLAYER_WIN) {
+    message += "you WON";
+  } else {
+    message += "you LOST";
+  }
+  alert(message);
+  isGameRunning = false;
 });
