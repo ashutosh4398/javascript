@@ -13,3 +13,15 @@ const obj = {
 
 obj.greet();
 obj.newGreet();
+
+
+const getFullName = function(
+    fname,
+    lname = fname.toUpperCase() === "ASHUTOSH"
+                ? "DHONDKAR"
+                : lname
+) {
+    console.log(fname + " " + lname);
+}
+
+getFullName("a");
