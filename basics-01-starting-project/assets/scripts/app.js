@@ -71,30 +71,11 @@ function calculateResult(calcOperation) {
     writeToLog(calcOperation, initialResult, enteredNumber, currentResult);
 }
 
-function addNumbers() {
-    // function to add numbers
-    calculateResult(operations.ADD);
-}
 
-function subtract() {
-    // function to subtract numbers
-    calculateResult(operations.SUBTRACT);
-}
-
-function multiply() {
-    // function to multiply numbers
-    calculateResult(operations.MULTIPLY);
-}
-
-function divide() {
-    // function to divide numbers
-    calculateResult(operations.DIVIDE);
-}
-
-addBtn.addEventListener('click', addNumbers);
-subtractBtn.addEventListener('click', subtract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+addBtn.addEventListener('click', calculateResult.bind(this, operations.ADD));
+subtractBtn.addEventListener('click', calculateResult.bind(this, operations.SUBTRACT));
+multiplyBtn.addEventListener('click', calculateResult.bind(this, operations.MULTIPLY));
+divideBtn.addEventListener('click', calculateResult.bind(this, operations.DIVIDE));
 
 // currentResultDescription = defaultResult + ' + 10';
 
