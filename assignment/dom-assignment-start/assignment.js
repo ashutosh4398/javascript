@@ -30,3 +30,32 @@ changeTitleDirectly();
 
 const h1Elem = document.querySelector('h1');
 h1Elem.textContent = 'Assignment Solved';
+
+
+
+// not a good approach
+const addNewTaskUsingHTMLString = () => {
+  // this is not a good approach as we are telling HTML to re-render
+  // all the list items 
+  // not good for bigger applications / performance issues can occur
+  const newLiItem = `
+    <li>New Task added using HTML String</li>
+  `;
+  const ol = document.querySelector("ol");
+  ol.innerHTML += newLiItem;
+
+  // NOTE: incase of input tag, this will result in unexpected results due to value attribute
+}
+
+
+// better approach
+const addNewTaskUsingHTMLStringPosition = () => {
+  const newLiItem = `
+    <li>New Task added using HTML String</li>
+  `;
+  const ol = document.querySelector("ol");
+  // ol.insertAdjacentHTML('beforebegin', newLiItem);
+  // ol.insertAdjacentHTML('afterend', newLiItem);
+  // ol.insertAdjacentHTML('afterbegin', newLiItem);
+  ol.insertAdjacentHTML('beforeend', newLiItem);
+}
