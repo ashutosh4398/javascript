@@ -46,20 +46,15 @@ const openModal = (modalElement) => {
 };
 
 const deleteMovie = (id) => {
-  console.log("DELETE CALLED!!");
   let movieIndex = null;
   let iterator = 0;
   for (const movie of movies) {
-    console.log(
-      `CURRENT MOVIE ID: ${movie.movieId}, MOVIE TO BE DELETED: ${id}`
-    );
     if (movie.movieId === id) {
       movieIndex = iterator;
       break;
     }
     iterator++;
   }
-  console.log(movieIndex);
   if (movieIndex === null) {
     return;
   }
@@ -75,7 +70,6 @@ const deleteMovie = (id) => {
 
 const deleteMovieHandler = (id) => {
   // show modal
-  console.log("CURRENT MOVIE ID: ", id);
   openModal(deleteMovieModal);
   //   there will be multiple event listeners for how many times deleteMovieHandler is called;
   // thus when we click on it, all the click events are executed
@@ -93,7 +87,7 @@ const deleteMovieHandler = (id) => {
   cancelDeleteModalBtn = cancelDeleteModalBtnClone;
 
   const deleteMovieBtnClone = deleteMovieBtn.cloneNode(true);
-  deleteMovieBtnClone.setAttribute("data-node-id", id);
+//   deleteMovieBtnClone.setAttribute("data-node-id", id);
   deleteMovieBtnClone.addEventListener("click", deleteMovie.bind(null, id));
   deleteMovieBtn.replaceWith(deleteMovieBtnClone);
   //   MAIN STEP TO MODIFY GLOBAL VARIABLE
