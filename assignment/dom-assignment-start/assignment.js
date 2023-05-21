@@ -59,3 +59,13 @@ const addNewTaskUsingHTMLStringPosition = () => {
   // ol.insertAdjacentHTML('afterbegin', newLiItem);
   ol.insertAdjacentHTML('beforeend', newLiItem);
 }
+
+
+// BEST APPROACH since we also have access to newly created element
+// instead of querying it
+const addNewTaskUsingMethods = () => {
+  const ol = document.querySelector("ol");
+  const listItemElem = document.createElement("li");
+  listItemElem.textContent = "New Task";
+  ol.appendChild(listItemElem);
+}
