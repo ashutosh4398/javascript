@@ -2,12 +2,12 @@ const arr = [];
 
 arr[2] = "NULL";
 
-for(const elem of arr) {
-    console.log(elem);
-}
+// for(const elem of arr) {
+//     console.log(elem);
+// }
 
-console.log(arr[100]);
-console.log(arr.length);
+// console.log(arr[100]);
+// console.log(arr.length);
 
 // // splice
 // const hobbies = ['Coding','Playing', 'Cooking', 'Swimming'];
@@ -70,3 +70,24 @@ console.log(arr.length);
 // const names = ['apurva','ashutosh', 'dhondkar'];
 // console.log(names.includes('ambekar'));
 // console.log(names.includes('ashutosh'));
+
+// forEach loop
+const prices = [10.99, 1, 30, 60];
+const tax = 0.18;
+const taxAdjustedPrices = [];
+
+// here we dont have access to index, explicitly
+// for (const price of prices) {
+//     taxAdjustedPrices.push(price * tax);
+// }
+// console.log(taxAdjustedPrices); // [ 1.9782, 0.18, 5.3999999999999995, 10.799999999999999 ]
+ 
+// alternative approach for iterating using forEach loop
+prices.forEach((price, idx, prices) => {
+    // please note that prices params will be shadowed and will be only accessible inside this callback fn
+    // but since it is a reference, if we modify it, the changes will also reflect on the original object
+    // prices.push("ashutosh")
+    taxAdjustedPrices.push({index: idx, adjustedPrice: price + (tax*price)});
+});
+
+console.log(taxAdjustedPrices);
