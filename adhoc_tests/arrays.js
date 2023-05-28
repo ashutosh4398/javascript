@@ -72,8 +72,8 @@ arr[2] = "NULL";
 // console.log(names.includes('ashutosh'));
 
 // forEach loop
-const prices = [5,10.99, 1, 30, 60];
-const tax = 0.18;
+// const prices = [5,10.99, 1, 30, 60];
+// const tax = 0.18;
 // const taxAdjustedPrices = [];
 
 // // here we dont have access to index, explicitly
@@ -141,13 +141,21 @@ const tax = 0.18;
 // console.log(arraySum);
 // // please note, the original array is not modified
 
-// splitting string to an array
-const csvValue = "ashutosh dhondkar;25;karza tech";
-// if we dont pass anything it returns [<original string>] => ["ashutosh dhondkar;25;karza tech"]
-const userDetails = csvValue.split(";");
-console.log(userDetails);
+// // splitting string to an array
+// const csvValue = "ashutosh dhondkar;25;karza tech";
+// // if we dont pass anything it returns [<original string>] => ["ashutosh dhondkar;25;karza tech"]
+// const userDetails = csvValue.split(";");
+// console.log(userDetails);
 
-// joining back to string
-// by default, if separator is not passed to join(), it considers ','
-const csv = userDetails.join(';');
-console.log(csv);
+// // joining back to string
+// // by default, if separator is not passed to join(), it considers ','
+// const csv = userDetails.join(';');
+// console.log(csv);
+
+// INTERESTING FEATURES
+// 1. spread operator -> pulls out all elements of array and gives it to us
+// returns shallow copy
+const  myName = ['ashutosh', 'nayan', 'dhondkar'];
+const shallowCopy = [...myName];
+// we canot use const shallowCopy = ...myName => const shallowCopy = 'ashutosh', 'nayan','dhondkar' -> invalid syntax
+console.log(shallowCopy);
