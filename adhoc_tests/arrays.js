@@ -103,19 +103,30 @@ const tax = 0.18;
 
 // console.log(taxAdjustedPrices);
 
-// sorting 
-console.log(prices.sort()); // [1, 10.99, 30, 5, 60]
-// this is because .sort() by defaults converts all elements to strings and then sorts them in lexicographic order
-// sort returns reference to the same array
-prices.sort((a,b) => {
-    // possibe values =[(1,10.99), (10.99, 30), (30, 5), (5,60)]
-    // thus it will swap the values based on return type, +ve, -ve or 0
-    if(a > b){
-        return 1; // (a,b) = (1, 10.99) keep a after b => [b,a] => [10.99, 1]
-    } else if(a === b) {
-        return 0; // keep original positions of a,b
-    } else {
-        return -1; // keep a before b => [a,b] => [1, 10.99]
-    }
-});
-console.log(prices);
+// // sorting 
+// console.log(prices.sort()); // [1, 10.99, 30, 5, 60]
+// // this is because .sort() by defaults converts all elements to strings and then sorts them in lexicographic order
+// // sort returns reference to the same array
+// prices.sort((a,b) => {
+//     // possibe values =[(1,10.99), (10.99, 30), (30, 5), (5,60)]
+//     // thus it will swap the values based on return type, +ve, -ve or 0
+//     if(a > b){
+//         return 1; // (a,b) = (1, 10.99) keep a after b => [b,a] => [10.99, 1]
+//     } else if(a === b) {
+//         return 0; // keep original positions of a,b
+//     } else {
+//         return -1; // keep a before b => [a,b] => [1, 10.99]
+//     }
+// });
+// console.log(prices);
+
+// filtering array
+const people = [{name: "ashutosh"}, {name: "apurva"}, {name: "test91"}, {name: "sies"}];
+// returns a new array ie shallow copy
+// if operation result is true, then only keep them else in case of false, remove them
+// just like filter we use in list comprehension in python
+const relatedNames = people.filter((obj) => obj.name !== 'test91');
+console.log(relatedNames)
+console.log(relatedNames === people);
+console.log(relatedNames[0].name, people[0].name);
+console.log(relatedNames[0] === people[0]);
