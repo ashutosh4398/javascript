@@ -120,13 +120,23 @@ const tax = 0.18;
 // });
 // console.log(prices);
 
-// filtering array
-const people = [{name: "ashutosh"}, {name: "apurva"}, {name: "test91"}, {name: "sies"}];
-// returns a new array ie shallow copy
-// if operation result is true, then only keep them else in case of false, remove them
-// just like filter we use in list comprehension in python
-const relatedNames = people.filter((obj) => obj.name !== 'test91');
-console.log(relatedNames)
-console.log(relatedNames === people);
-console.log(relatedNames[0].name, people[0].name);
-console.log(relatedNames[0] === people[0]);
+// // filtering array
+// const people = [{name: "ashutosh"}, {name: "apurva"}, {name: "test91"}, {name: "sies"}];
+// // returns a new array ie shallow copy
+// // if operation result is true, then only keep them else in case of false, remove them
+// // just like filter we use in list comprehension in python
+// const relatedNames = people.filter((obj) => obj.name !== 'test91');
+// console.log(relatedNames)
+// console.log(relatedNames === people);
+// console.log(relatedNames[0].name, people[0].name);
+// console.log(relatedNames[0] === people[0]);
+
+
+// reduce method
+const pricesArr = [10, 20, 30, 40];
+// here 0 is the initial value ie it will be set in prevValue while currentValue is 10
+// afterwards, prevValue will be 0+10 and currentValue will be 20
+
+const arraySum = pricesArr.reduce((prevValue, currentValue) => prevValue + currentValue, 0);
+console.log(arraySum);
+// please note, the original array is not modified
