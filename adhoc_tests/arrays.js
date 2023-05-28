@@ -159,3 +159,14 @@ const  myName = ['ashutosh', 'nayan', 'dhondkar'];
 const shallowCopy = [...myName];
 // we canot use const shallowCopy = ...myName => const shallowCopy = 'ashutosh', 'nayan','dhondkar' -> invalid syntax
 console.log(shallowCopy);
+
+// 2. destructuring
+const fullName = ['ashutosh', 'dhondkar', 'Mr', 30, 90];
+// const fname = fullName[0];
+// const lname = fullName[1];
+// shortcut [variables] = [iterable]
+// in this context ... is used as REST operator
+const [fname, lname, ...otherInfo] = fullName;
+console.log(fname, lname);
+console.log(otherInfo);
+
