@@ -28,3 +28,21 @@ console.log(arr.length);
 
 
 // range and creating copies
+// const testResults = [1, 5.3, 1.4, 10.99, -5, 10];
+// // if we dont pass start and end value in splice, it returns the entire array
+// const storedResults = testResults.splice();
+// console.log(testResults === storedResults);
+
+// // splice returns a brand new array, ie new copy
+// console.log(testResults.slice())
+// // similar to list slicing in python
+// console.log(testResults.slice(1, 5));
+
+// array concat
+// works similar to extends method in python,
+// returns a brand new array
+const testResults = [1,2,3,4];
+const storedResults = testResults.concat([10, 9, 8, 7]);
+testResults.push(-1, -2);
+console.log(testResults) // [1,2,3,4, -1, -2]
+console.log(storedResults); // [1,2,3,4,10,9,8,7]
