@@ -47,13 +47,21 @@ console.log(arr.length);
 // console.log(testResults) // [1,2,3,4, -1, -2]
 // console.log(storedResults); // [1,2,3,4,10,9,8,7]
 
-// get index using indexOf and lastIndexOf
-const testResults = ["ashutosh", "dhondkar", "apurva", "ambekar"];
-const resultIndex = testResults.indexOf("test");
-console.log(resultIndex); // -1 => element not found
+// // get index using indexOf and lastIndexOf
+// const testResults = ["ashutosh", "dhondkar", "apurva", "ambekar"];
+// const resultIndex = testResults.indexOf("test");
+// console.log(resultIndex); // -1 => element not found
 
-console.log(testResults.indexOf("apurva"));
-// indexOf => returns index of first matching element from left
-// lastIndexOf => returns index of matching elemrnt from right
-// works fine only for primitive values and not for reference values
+// console.log(testResults.indexOf("apurva"));
+// // indexOf => returns index of first matching element from left
+// // lastIndexOf => returns index of matching elemrnt from right
+// // works fine only for primitive values and not for reference values
 
+// if we want to get index of reference values from array, we can use find/ method
+const people = [{name: "Ashutosh"}, {name: "Apurva"}];
+
+// returns element if found in array, else returns undefined
+const ashutosh = people.find((person, idx) => person.name === "Dhondkar");
+// returns index  of element in array, returns -1 if element is not found
+const ashutoshIndex = people.findIndex((person, idx) => person.name === "Dhondkar");
+console.log(ashutosh, ashutoshIndex);
