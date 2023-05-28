@@ -132,11 +132,22 @@ const tax = 0.18;
 // console.log(relatedNames[0] === people[0]);
 
 
-// reduce method
-const pricesArr = [10, 20, 30, 40];
-// here 0 is the initial value ie it will be set in prevValue while currentValue is 10
-// afterwards, prevValue will be 0+10 and currentValue will be 20
+// // reduce method
+// const pricesArr = [10, 20, 30, 40];
+// // here 0 is the initial value ie it will be set in prevValue while currentValue is 10
+// // afterwards, prevValue will be 0+10 and currentValue will be 20
 
-const arraySum = pricesArr.reduce((prevValue, currentValue) => prevValue + currentValue, 0);
-console.log(arraySum);
-// please note, the original array is not modified
+// const arraySum = pricesArr.reduce((prevValue, currentValue) => prevValue + currentValue, 0);
+// console.log(arraySum);
+// // please note, the original array is not modified
+
+// splitting string to an array
+const csvValue = "ashutosh dhondkar;25;karza tech";
+// if we dont pass anything it returns [<original string>] => ["ashutosh dhondkar;25;karza tech"]
+const userDetails = csvValue.split(";");
+console.log(userDetails);
+
+// joining back to string
+// by default, if separator is not passed to join(), it considers ','
+const csv = userDetails.join(';');
+console.log(csv);
