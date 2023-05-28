@@ -72,22 +72,50 @@ arr[2] = "NULL";
 // console.log(names.includes('ashutosh'));
 
 // forEach loop
-const prices = [10.99, 1, 30, 60];
+const prices = [5,10.99, 1, 30, 60];
 const tax = 0.18;
-const taxAdjustedPrices = [];
+// const taxAdjustedPrices = [];
 
-// here we dont have access to index, explicitly
-// for (const price of prices) {
-//     taxAdjustedPrices.push(price * tax);
-// }
-// console.log(taxAdjustedPrices); // [ 1.9782, 0.18, 5.3999999999999995, 10.799999999999999 ]
+// // here we dont have access to index, explicitly
+// // for (const price of prices) {
+// //     taxAdjustedPrices.push(price * tax);
+// // }
+// // console.log(taxAdjustedPrices); // [ 1.9782, 0.18, 5.3999999999999995, 10.799999999999999 ]
  
-// alternative approach for iterating using forEach loop
-prices.forEach((price, idx, prices) => {
-    // please note that prices params will be shadowed and will be only accessible inside this callback fn
-    // but since it is a reference, if we modify it, the changes will also reflect on the original object
-    // prices.push("ashutosh")
-    taxAdjustedPrices.push({index: idx, adjustedPrice: price + (tax*price)});
-});
+// // alternative approach for iterating using forEach loop
+// prices.forEach((price, idx, prices) => {
+//     // please note that prices params will be shadowed and will be only accessible inside this callback fn
+//     // but since it is a reference, if we modify it, the changes will also reflect on the original object
+//     // prices.push("ashutosh")
+//     taxAdjustedPrices.push({index: idx, adjustedPrice: price + (tax*price)});
+// });
 
-console.log(taxAdjustedPrices);
+// console.log(taxAdjustedPrices);
+
+
+// transforming array using map method
+// returns a brand new array with the return values
+// prices array will not be modified
+// const taxAdjustedPrices = prices.map((price, idx, prices) => {
+//     const elem = {index: idx, adjustedPrice: price + (tax*price)};
+//     return elem;
+// });
+
+// console.log(taxAdjustedPrices);
+
+// sorting 
+console.log(prices.sort()); // [1, 10.99, 30, 5, 60]
+// this is because .sort() by defaults converts all elements to strings and then sorts them in lexicographic order
+// sort returns reference to the same array
+prices.sort((a,b) => {
+    // possibe values =[(1,10.99), (10.99, 30), (30, 5), (5,60)]
+    // thus it will swap the values based on return type, +ve, -ve or 0
+    if(a > b){
+        return 1; // (a,b) = (1, 10.99) keep a after b => [b,a] => [10.99, 1]
+    } else if(a === b) {
+        return 0; // keep original positions of a,b
+    } else {
+        return -1; // keep a before b => [a,b] => [1, 10.99]
+    }
+});
+console.log(prices);
