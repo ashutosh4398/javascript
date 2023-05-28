@@ -14,12 +14,7 @@ console.log(multiplicationResult);
 
 // QUESTION 2
 const findMax = (...numbers) => {
-  // REST OPERATOR
-  let max;
-  numbers.forEach((num, _) => {
-    max = !max ? num : num > max ? num : max;
-  });
-  return max;
+  return Math.max(...numbers);
 };
 
 const maxVal = findMax(...arr);
@@ -27,12 +22,7 @@ console.log(maxVal);
 
 // QUESTION 3
 const findMaxAndMix = (...numbers) => {
-  let max, min;
-  numbers.forEach((num, _) => {
-    max = !max ? num : num > max ? num : max;
-    min = !min ? num : num < min ? num : min;
-  });
-  return [max, min];
+  return [Math.max(...numbers), Math.min(...numbers)];
 };
 
 const [maxVal1, minVal1] = findMaxAndMix(...arr); // ... used as spread operator
