@@ -38,11 +38,22 @@ console.log(arr.length);
 // // similar to list slicing in python
 // console.log(testResults.slice(1, 5));
 
-// array concat
-// works similar to extends method in python,
-// returns a brand new array
-const testResults = [1,2,3,4];
-const storedResults = testResults.concat([10, 9, 8, 7]);
-testResults.push(-1, -2);
-console.log(testResults) // [1,2,3,4, -1, -2]
-console.log(storedResults); // [1,2,3,4,10,9,8,7]
+// // array concat
+// // works similar to extends method in python,
+// // returns a brand new array
+// const testResults = [1,2,3,4];
+// const storedResults = testResults.concat([10, 9, 8, 7]);
+// testResults.push(-1, -2);
+// console.log(testResults) // [1,2,3,4, -1, -2]
+// console.log(storedResults); // [1,2,3,4,10,9,8,7]
+
+// get index using indexOf and lastIndexOf
+const testResults = ["ashutosh", "dhondkar", "apurva", "ambekar"];
+const resultIndex = testResults.indexOf("test");
+console.log(resultIndex); // -1 => element not found
+
+console.log(testResults.indexOf("apurva"));
+// indexOf => returns index of first matching element from left
+// lastIndexOf => returns index of matching elemrnt from right
+// works fine only for primitive values and not for reference values
+
