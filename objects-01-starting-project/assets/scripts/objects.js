@@ -65,7 +65,15 @@ const addMovieHandler = () => {
   renderMovies();
 };
 
-const searchMovieHandler = () => {
+// const searchMovieHandler = () => {
+//   const filterTerm = document.getElementById("filter-title").value;
+//   renderMovies(filterTerm);
+// };
+const searchMovieHandler = function() {
+    // eventListener, binds the callback function's this object to the element which is resposible
+    // for triggering the event
+    console.log(this);
+    console.log(this.id, this.textContent);
   const filterTerm = document.getElementById("filter-title").value;
   renderMovies(filterTerm);
 };
