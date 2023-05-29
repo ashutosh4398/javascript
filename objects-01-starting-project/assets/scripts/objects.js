@@ -22,10 +22,11 @@ const renderMovies = (filter = "") => {
   filteredMovies.forEach((movie) => {
     const movieEl = document.createElement("li");
     // using object destructuring
-    const { info, ...otherData } = movie; // in this case, ... is used as rest operator
+    const { info, getFormattedTitle, ...otherData } = movie; // in this case, ... is used as rest operator
     // renaming existing keys to some other variable
     const { title: renamedTitle } = info;
-    let title = renamedTitle + " - ";
+    // using .call() to configure this, otherwise it would use global context for this
+    let title = getFormattedTitle.call(movie) + " - ";
 
     for (const key in info) {
       if (key !== "title") {
@@ -54,6 +55,10 @@ const addMovieHandler = () => {
       [extraName]: extraValue, // dynamic keyname generation
     },
     id: Math.random().toString(), // chaining
+    // using this keyword
+    getFormattedTitle : function() {
+        return this.info.title.toUpperCase();
+    }
   };
 
   movies.push(newMovie);
