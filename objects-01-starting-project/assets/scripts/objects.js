@@ -49,7 +49,7 @@ const addMovieHandler = () => {
       title, // shorthand notation variable name = keyname
       [extraName]: extraValue, // dynamic keyname generation
     },
-    id: movies.length + 1,
+    id: Math.random().toString(), // chaining
   };
 
   movies.push(newMovie);
