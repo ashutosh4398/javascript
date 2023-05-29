@@ -21,12 +21,16 @@ const renderMovies = (filter = "") => {
 
   filteredMovies.forEach((movie) => {
     const movieEl = document.createElement("li");
-    let title = movie?.info?.title + " - ";
+    // using object destructuring
+    const { info, ...otherData } = movie; // in this case, ... is used as rest operator
+    // renaming existing keys to some other variable
+    const { title: renamedTitle } = info;
+    let title = renamedTitle + " - ";
 
-    for (const key in movie.info) {
+    for (const key in info) {
       if (key !== "title") {
         // dynamic key access using square brackets
-        title += `${key}: ${movie.info[key]},`;
+        title += `${key}: ${info[key]},`;
       }
     }
 
