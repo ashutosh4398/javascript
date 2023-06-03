@@ -17,9 +17,12 @@ Output: 2, nums = [2,2,_*,_*]
 `
 
 const replaceInPlace = (nums, val) => {
+    let nonValCount= 0;
     for(const i in nums) {
         if (nums[i] === val) {
             nums[i] = "_";
+        } else {
+            nonValCount++;
         }
     }
 
@@ -33,7 +36,7 @@ const replaceInPlace = (nums, val) => {
             return 1;
         }
     });
-    return nums;
+    return [nonValCount,nums];
 }
 
 console.log(replaceInPlace([3,2,2,3], 3));
