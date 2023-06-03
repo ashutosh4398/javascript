@@ -16,9 +16,28 @@ class Product {
   }
 }
 
+class ShoppingCart {
+  items = [];
+
+  render() {
+    const cartEl = document.createElement("section");
+    cartEl.innerHTML = `
+      <h2>Total: \$${0}</h2>
+      <button>Order now!</button>
+    `;
+    cartEl.className = "cart";
+    return cartEl;
+  }
+}
+
 class ProductItem {
   constructor(product) {
     this.product = product;
+  }
+
+  addToCartHandler() {
+    console.log("Adding product to cart...")
+    console.log(this.product);
   }
 
   render() {
@@ -35,6 +54,10 @@ class ProductItem {
                 </div>
             </div>
         `;
+    const addCartButton = productEl.querySelector("button");
+    // this will point to btn element inside the eventHandler
+    // thus we have to bind
+    addCartButton.addEventListener("click", this.addToCartHandler.bind(this));
     return productEl;
   }
 }
@@ -65,8 +88,20 @@ class ProductList {
       const productEl = productItem.render();
       productList.append(productEl);
     }
+    return productList;
   }
 }
 
-const productList = new ProductList();
-productList.render();
+class Shop {
+
+  render() {
+    const renderHook = document.getElementById("app");
+
+    const cart = new ShoppingCart();
+    cart.render();
+    const productList = new ProductList();
+    productList.render();
+
+  }
+}
+
