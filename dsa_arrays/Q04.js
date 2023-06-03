@@ -14,19 +14,33 @@ Thus, the result should be [1,2,4].
 
 </aside>`
 
-const addLargeNumber = digits => {
-    let carry = 1; // since we have to add 1 to the last element
-    for(let i = digits.length-1; i >= 0; i--) {
-        const temp = (digits[i] + carry);
-        carry = parseInt(temp / 10);
-        digits[i] = temp%10;
+// const addLargeNumber = digits => {
+//     let carry = 1; // since we have to add 1 to the last element
+//     for(let i = digits.length-1; i >= 0; i--) {
+//         const temp = (digits[i] + carry);
+//         carry = parseInt(temp / 10);
+//         digits[i] = temp%10;
+//     }
+//     if (carry > 0) {
+//         digits.unshift(carry);
+//     }
+//     return digits;
+// }
+
+const addLargeNumber = (digits, carry=1, i=digits.length-1) => {
+    if(i < 0) {
+        if(carry) {
+            digits.unshift(carry);
+        }
+        return digits;
     }
-    if (carry > 0) {
-        digits.unshift(carry);
-    }
-    return digits;
+
+    const temp = digits[i] + carry;
+    digits[i] = temp%10;
+    carry = parseInt(temp/10);
+    return addLargeNumber(digits, carry, i-1);
 }
 
 // test cases
-// console.log(addLargeNumber([9,9,9]));
+console.log(addLargeNumber([9,9,9]));
 // console.log(addLargeNumber([1,2,3]));
