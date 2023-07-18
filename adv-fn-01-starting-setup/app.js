@@ -28,3 +28,17 @@ const addNumbers = (num1, num2) => {
 }
 
 // FACTORY FUNCTIONS
+const createTaxCalculator = (tax) => {
+    return (amount) => {
+        return tax * amount;
+    }
+};
+
+const calculateVatAmount = createTaxCalculator(0.19);
+const calculateIncomeAmount = createTaxCalculator(0.25);
+
+console.log(calculateVatAmount(100))
+console.log(calculateVatAmount(200))
+
+console.log(calculateIncomeAmount(100))
+console.log(calculateIncomeAmount(200))
