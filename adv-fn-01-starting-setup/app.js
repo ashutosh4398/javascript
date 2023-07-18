@@ -42,3 +42,16 @@ console.log(calculateVatAmount(200))
 
 console.log(calculateIncomeAmount(100))
 console.log(calculateIncomeAmount(200))
+
+
+// closures
+
+let userName = "Ashutosh";
+const greetUser = () => {
+    // let name = userName;
+    console.log("Hi " + name_);
+}
+
+let name_ = "Dhondkar";
+
+greetUser();
