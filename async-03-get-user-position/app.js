@@ -74,7 +74,21 @@ function trackUserHandler() {
   i += 10;
 }
 
-button.addEventListener('click', trackUserHandler);
+// async functions always returns promises
+async function trackUser() {
+  let getPos;
+  try {
+    getPos = await getPosition(); //await => .then() => returns resolve()
+  } catch (error) {
+    console.log("Error occured");  
+    console.log(error);  
+  }
+  const timerData = await setTimer(2000);
+  console.log(timerData, getPos);
+}
+
+// button.addEventListener('click', trackUserHandler); // using promises
+button.addEventListener('click', trackUser); // using async-await
 
 // let result = 0;
 
