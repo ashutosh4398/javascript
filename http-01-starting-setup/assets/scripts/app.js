@@ -20,16 +20,32 @@ const sendHttpRequest = (method, path, data) => {
     const xhr = new XMLHttpRequest();
     xhr.open(method.toUpperCase(), API_DOMAIN + path);
     xhr.onload = function () {
-      // convert the string to json
-      resolve(JSON.parse(xhr.response));
+      if (xhr.status >= 200 && xhr.status < 300) {
+        // convert the string to json
+        resolve(JSON.parse(xhr.response));
+      } else {
+        reject(new Error(xhr.response));
+      }
     };
+
+    xhr.onerror = function() {
+      reject(new Error("Failed"));
+    }
     xhr.send(JSON.stringify(data));
   });
   return promise;
 };
 
 const fetchPosts = async () => {
-  const resp = await sendHttpRequest("GET", "/posts");
+  console.log("FETCHING POSTS...");
+  let resp;
+  try {
+    resp = await sendHttpRequest("GET", "/pos");
+  } catch (error) {
+    console.log(error.message);
+    console.log(typeof(error.message));
+    resp = [];
+  }
   const listOfPosts = resp;
   listOfPosts.map((post, idx) => {
     // make a deep copy of the post template
@@ -62,6 +78,8 @@ formEl.addEventListener("submit", async (event) => {
 
 
 listElement.addEventListener('click', async event => {
+  console.log(event.target);
+  console.log(event.currentTarget);
   if(event.target.tagName === "BUTTON") {
     const listElem = event.target.closest("li")
     const postId = listElem.id;
