@@ -17,9 +17,14 @@ class ElementAttribute {
 }
 
 class Component {
-  constructor(renderHookId) {
+  constructor(renderHookId, render=true) {
     this.hookId = renderHookId;
+    if(render) {
+      this.render();
+    }
   }
+
+  render() {}
 
   createRootElement(tag, cssClasses, attributes) {
     const rootElem = document.createElement(tag);
@@ -74,8 +79,10 @@ class ShoppingCart extends Component{
 class ProductItem extends Component {
   // used to render a product
   constructor(product, renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.product = product;
+    // explicitly call render after product is set
+    this.render();
   }
 
   addToCart() {
@@ -105,43 +112,58 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  // class field
-  products = [
-    new Product({
-      title: "A Pillow",
-      imageUrl:
-        "https://images.unsplash.com/photo-1613336026275-d6d473084e85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      price: 19.99,
-      description: "A soft pillow",
-    }),
-    new Product({
-      title: "A Carpet",
-      imageUrl:
-        "https://images.unsplash.com/photo-1613336026275-d6d473084e85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      price: 89.99,
-      description: "Carpet it is",
-    }),
-  ];
+
+  products = [];
 
   constructor(renderHookId) {
     super(renderHookId);
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.products = [
+      new Product({
+        title: "A Pillow",
+        imageUrl:
+          "https://images.unsplash.com/photo-1613336026275-d6d473084e85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        price: 19.99,
+        description: "A soft pillow",
+      }),
+      new Product({
+        title: "A Carpet",
+        imageUrl:
+          "https://images.unsplash.com/photo-1613336026275-d6d473084e85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        price: 89.99,
+        description: "Carpet it is",
+      }),
+    ];
+
+    this.renderProducts();
+  }
+
+  renderProducts() {
+    for (const product of this.products) {
+      new ProductItem(product, "prod-list");
+    }
   }
 
   render() {
     this.createRootElement("ul", "product-list", [new ElementAttribute("id", "prod-list")]);
-    for (const product of this.products) {
-      const productItem = new ProductItem(product, "prod-list");
-      productItem.render();
+    if(this.products && this.products.length > 0) {
+      this.renderProducts();
     }
   }
 }
 
-class Shop {
+class Shop extends Component {
+  
+  constructor() {
+    super()
+  }
+
   render() {
     this.cart = new ShoppingCart("app");
-    this.cart.render();
-    const productList = new ProductList("app");
-    productList.render();
+    new ProductList("app");
   }
 }
 
@@ -150,7 +172,6 @@ class App {
 
   static init() {
     const shop = new Shop();
-    shop.render();
     this.cart = shop.cart; // this points to class object and not any instance
   }
 
