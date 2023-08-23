@@ -9,13 +9,21 @@ class Product {
   }
 }
 
-
 class ShoppingCart {
   items = [];
 
+  set cartItems(value) {
+    this.items = value;
+    this.totalOutput.innerHTML = `Total amount: \$${this.totalAmount.toFixed(2)}`;
+  }
+
+  get totalAmount() {
+    return this.items.reduce((acc, current) => acc + current.price, 0);
+  }
+
   addProduct(product) {
-    this.items.push(product);
-    this.totalOutput.innerHTML = `Total amount: \$${1}`;
+    const updatedItems = [...this.items, product];
+    this.cartItems = updatedItems;
   }
 
   render() {
@@ -63,7 +71,6 @@ class ProductItem {
   }
 }
 
-
 class ProductList {
   // class field
   products = [
@@ -88,20 +95,17 @@ class ProductList {
   }
 
   render() {
-    
     const prodList = document.createElement("ul");
     prodList.className = "product-list";
     for (const product of this.products) {
       const productItem = new ProductItem(product);
-      const prodEl = productItem.render()
+      const prodEl = productItem.render();
       prodList.append(prodEl);
     }
 
     return prodList;
   }
 }
-
-
 
 class Shop {
   render() {
@@ -117,7 +121,7 @@ class Shop {
 
 class App {
   static cart; // just for readability
-  
+
   static init() {
     const shop = new Shop();
     shop.render();
@@ -131,8 +135,4 @@ class App {
   }
 }
 
-
-App.init()
-
-
-
+App.init();
