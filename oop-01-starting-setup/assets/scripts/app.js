@@ -12,12 +12,19 @@ class Product {
 
 class ShoppingCart {
   items = [];
+
+  addProduct(product) {
+    this.items.push(product);
+    this.totalOutput.innerHTML = `Total amount: \$${1}`;
+  }
+
   render() {
     const cartEl = document.createElement("section");
     cartEl.innerHTML = `
       <h2>Total amount: \$${0}</h2>
       <button>Order now!</button>
     `;
+    this.totalOutput = cartEl.querySelector("h2");
     cartEl.className = "cart";
     return cartEl;
   }
@@ -32,6 +39,7 @@ class ProductItem {
   addToCart() {
     console.log("Adding product to cart!");
     console.log(this.product);
+    App.addProductToCart(this.product);
   }
 
   render() {
@@ -98,8 +106,8 @@ class ProductList {
 class Shop {
   render() {
     const renderHook = document.getElementById("app");
-    const shoppingCart = new ShoppingCart();
-    const shoppingCartEl = shoppingCart.render();
+    this.cart = new ShoppingCart();
+    const shoppingCartEl = this.cart.render();
     const productList = new ProductList();
     const productListEl = productList.render();
     renderHook.append(shoppingCartEl);
@@ -107,7 +115,24 @@ class Shop {
   }
 }
 
-const shop = new Shop();
-shop.render();
+class App {
+  static cart; // just for readability
+  
+  static init() {
+    const shop = new Shop();
+    shop.render();
+    this.cart = shop.cart; // this points to class object and not any instance
+  }
+
+  static addProductToCart(product) {
+    this.cart.addProduct(product);
+    // since this method will be called using class name, this will refer to class
+    // ex: App.addProductToCart();
+  }
+}
+
+
+App.init()
+
 
 
