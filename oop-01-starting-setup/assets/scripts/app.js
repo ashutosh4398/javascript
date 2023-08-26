@@ -122,15 +122,16 @@ class ProductItem extends Component {
 
 class ProductList extends Component {
 
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
+    this.render()
     this.fetchProducts();
   }
 
   fetchProducts() {
-    this.products = [
+    this.#products = [
       new Product({
         title: "A Pillow",
         imageUrl:
@@ -151,14 +152,14 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const product of this.products) {
+    for (const product of this.#products) {
       new ProductItem(product, "prod-list");
     }
   }
 
   render() {
     this.createRootElement("ul", "product-list", [new ElementAttribute("id", "prod-list")]);
-    if(this.products && this.products.length > 0) {
+    if(this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
   }
